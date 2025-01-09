@@ -1,0 +1,278 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 10px;
+    background: #ddd;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.tab-button.active {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+form.hidden {
+    display: none;
+}
+
+form {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+form label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+form input,
+form select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+form select {
+    cursor: pointer;
+}
+
+form button {
+    padding: 12px 30px;
+    font-size: 18px;
+    border: none;
+    background-color: #28a745;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #218838;
+}
+
+/* Table styles */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f8f9fa;
+}
+
+table td .btn {
+    padding: 8px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+table td .edit {
+    background-color: #007bff;
+    color: #fff;
+}
+
+table td .delete {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+table td .btn:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Active tab styles for each tab */
+.tab-button.tab1-active {
+    background-color: #28a745;
+    /* Green for Tab 1 */
+    color: #fff;
+}
+
+.tab-button.tab2-active {
+    background-color: #fd7e14;
+    /* Orange for Tab 2 */
+    color: #fff;
+}
+
+.tab-button.tab3-active {
+    background-color: #dc3545;
+    /* Red for Tab 3 */
+    color: #fff;
+}
+
+.tab-button.tab4-active {
+    background-color: #007bff;
+    /* Blue for Tab 4 */
+    color: #fff;
+}
+
+.tab-button.tab5-active {
+    background-color: #e83e8c;
+    /* Pink for Tab 5 */
+    color: #fff;
+}
+
+/* General textarea styles */
+form textarea {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    resize: vertical;
+    /* Allow vertical resizing */
+    min-height: 80px;
+    /* Ensure a default height */
+}
+
+/* Focus state for textarea */
+form textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    /* Add a blue border on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    /* Add a light blue glow */
+}
+
+
+/* Responsive Table for Mobile */
+@media (max-width: 768px) {
+    table {
+        display: block;
+    }
+
+    table thead {
+        display: none;
+    }
+
+    table tbody {
+        display: block;
+    }
+
+    table tr {
+        display: block;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        font-size: 14px;
+        border-bottom: 1px solid #eee;
+    }
+
+    table td:last-child {
+        border-bottom: none;
+    }
+
+    table td:before {
+        content: attr(data-label);
+        flex-basis: 40%;
+        text-align: left;
+        font-weight: bold;
+        color: #555;
+    }
+
+    table td .btn {
+        margin-left: auto;
+    }
+}
+
+/* Modal-specific customization */
+.modal-content {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    background-color: #007bff;
+    color: #fff;
+    border-bottom: none;
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+.modal-footer {
+    border-top: none;
+}
+
+.modal .form-label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.modal .form-control,
+.modal .form-select {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.modal .form-control:focus,
+.modal .form-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}

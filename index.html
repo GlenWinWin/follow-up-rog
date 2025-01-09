@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive CRUD App with Tabs</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>FIRST TIMERS FOR THE MONTH OF JANUARY 2025</h1>
+        <!-- Tabs -->
+        <div class="tabs mt-4">
+            <button class="tab-button active" data-tab="tab1">XO YOUTH</button>
+            <button class="tab-button" data-tab="tab2">YOUNG ADULTS</button>
+            <button class="tab-button" data-tab="tab3">RIVER WOMEN</button>
+            <button class="tab-button" data-tab="tab4">RIVER MEN</button>
+            <button class="tab-button" data-tab="tab5">SEASONED</button>
+        </div>
+
+        <!-- Tab Contents -->
+        <div id="tab1" class="tab-content active">
+            <form id="dataForm1" class="hidden">
+                <label for="name1">Name:</label>
+                <input type="text" id="name1" placeholder="Enter name" required>
+
+                <label for="interested1">Interested to Join:</label>
+                <select id="interested1">
+                    <option value="">Select an option</option>
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
+                </select>
+
+                <label for="discipler1">Discipler:</label>
+                <input type="text" id="discipler1" placeholder="Enter discipler" required>
+
+                <label for="texted1">Texted Already:</label>
+                <select id="texted1">
+                    <option value="">Select an option</option>
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
+                </select>
+
+                <label for="update1">Update:</label>
+                <textarea id="update1" placeholder="Enter update" rows="4"></textarea>
+
+                <label for="followedUp1">Followed Up:</label>
+                <input type="text" id="followedUp1" placeholder="Enter followed up">
+
+                <label for="started1">Started One2One:</label>
+                <select id="started1">
+                    <option value="">Select an option</option>
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
+                </select>
+
+                <button type="submit">Save</button>
+            </form>
+            <div class="table-wrapper">
+                <table id="dataTable1">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Interested to Join</th>
+                            <th>Discipler</th>
+                            <th>Texted</th>
+                            <th>Update</th>
+                            <th>Followed Up</th>
+                            <th>Started One2One</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Repeat similar structure for Tab 2, Tab 3, Tab 4, and Tab 5 -->
+        <div id="tab2" class="tab-content">
+            <form id="dataForm2" class="hidden">
+                <!-- Same structure as Tab 1 -->
+            </form>
+            <div class="table-wrapper">
+                <table id="dataTable2">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Interested to Join</th>
+                            <th>Discipler</th>
+                            <th>Texted</th>
+                            <th>Update</th>
+                            <th>Followed Up</th>
+                            <th>Started One2One</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Repeat Tab 3, Tab 4, Tab 5 -->
+    </div>
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Record</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form inside modal -->
+                    <form id="editForm">
+                        <div class="mb-3">
+                            <label for="modalName" class="form-label">Name:</label>
+                            <input type="text" id="modalName" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modalInterested" class="form-label">Interested to Join:</label>
+                            <select id="modalInterested" class="form-select" required>
+                                <option value="">Select an option</option>
+                                <option value="YES">YES</option>
+                                <option value="NO">NO</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modalDiscipler" class="form-label">Discipler:</label>
+                            <input type="text" id="modalDiscipler" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modalTexted" class="form-label">Texted Already:</label>
+                            <select id="modalTexted" class="form-select" required>
+                                <option value="">Select an option</option>
+                                <option value="YES">YES</option>
+                                <option value="NO">NO</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modalUpdate" class="form-label">Update:</label>
+                            <textarea id="modalUpdate" class="form-control" rows="4" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modalFollowedUp" class="form-label">Followed Up:</label>
+                            <input type="text" id="modalFollowedUp" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="modalStarted" class="form-label">Started One2One:</label>
+                            <select id="modalStarted" class="form-select" required>
+                                <option value="">Select an option</option>
+                                <option value="YES">YES</option>
+                                <option value="NO">NO</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveModal">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
