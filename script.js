@@ -1,66 +1,5 @@
 const databases = {
-    tab1: [
-        {
-            discipler: "",
-            followedUp: "",
-            id: 1736397338163,
-            interested: "",
-            name: "Imee Warde",
-            started: "",
-            texted: "",
-            update: "",
-        },
-        {
-            discipler: "",
-            followedUp: "",
-            id: 1736397338164,
-            interested: "",
-            name: "Carissa Traigo",
-            started: "",
-            texted: "",
-            update: "",
-        },
-        {
-            discipler: "",
-            followedUp: "",
-            id: 1736397338165,
-            interested: "",
-            name: "Catherine Quimpo",
-            started: "",
-            texted: "",
-            update: "",
-        },
-        {
-            discipler: "",
-            followedUp: "",
-            id: 1736397338166,
-            interested: "",
-            name: "Irene Destura",
-            started: "",
-            texted: "",
-            update: "",
-        },
-        {
-            discipler: "",
-            followedUp: "",
-            id: 1736397338167,
-            interested: "",
-            name: "Nerilyn Dela Cruz",
-            started: "",
-            texted: "",
-            update: "",
-        },
-        {
-            discipler: "",
-            followedUp: "",
-            id: 1736397338168,
-            interested: "",
-            name: "Meryl Dee",
-            started: "",
-            texted: "",
-            update: "",
-        },
-    ],
+    tab1: [],
     tab2: [],
     tab3: [],
     tab4: [],
@@ -72,8 +11,11 @@ let editState = {
     id: null,
 };
 
+let arrayDetails;
+
+getData("tab1");
+
 const saveButton = document.getElementById("saveModal");
-console.log(saveButton); // Check if the button exists
 if (saveButton) {
     saveButton.addEventListener("click", () => {
         const database = databases[editState.tab];
@@ -201,9 +143,77 @@ document.querySelectorAll(".tab-button").forEach((tabButton) => {
         document.getElementById(targetTab).classList.add("active");
 
         // Render table for the selected tab
-        renderTable(targetTab);
+        getData(targetTab);
+
+        // renderTable(targetTab);
     });
 });
+
+function getData(targetTab) {
+    let API_KEY = "AIzaSyAhVwHSDKNFqhLcERQPWXXQrWTezS9mmmI";
+    let SPREADSHEET_ID = "1Ta9OsOKkrydSdtnSN-HUjEcUMevgboc1mlzmlDZX1_U";
+    let RANGE = "JANUARY";
+    let index = parseInt(String(targetTab).replace("tab", "")) - 1;
+
+    let URL = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${API_KEY}`;
+
+    if (arrayDetails !== undefined) {
+        populateTable(index, targetTab);
+    }
+    else {
+        fetch(URL)
+            .then(res => res.json())
+            .then(data => {
+                arrayDetails = data.values;
+            })
+            .catch(error => console.error("Error fetching data:", error));
+    }
+
+
+}
+
+function populateTable(index, targetTab) {
+    const searchTexts = ["XO", "YA", "WOMEN", "MEN", "SEASONED"];
+    const result = findIndicesByText(arrayDetails, searchTexts);
+
+    const start = (result[index] + 1);
+    const end = index == 4 ? (arrayDetails.length - 1) : ((result[index + 1]) - 1);
+
+    const tableBody = document.querySelector(`#dataTable${targetTab.replace("tab", "")} tbody`);
+    tableBody.innerHTML = ""; // Clear table
+    for (var i = start; i <= end; i++) {
+        if (String(arrayDetails[i][3]).trim() !== "") {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+            <td data-label="Name">${arrayDetails[i][3]}</td>
+            <td data-label="Interested to Join">${arrayDetails[i][9]}</td>
+            <td data-label="Discipler">${arrayDetails[i][10]}</td>
+            <td data-label="Texted">${arrayDetails[i][11]}</td>
+            <td data-label="Update">${arrayDetails[i][12] ?? ""}</td>
+            <td data-label="Followed Up">${arrayDetails[i][13] ?? ""}</td>
+            <td data-label="Started One2One">${arrayDetails[i][14] ?? ""}</td>
+            <td data-label="Actions">
+                <button class="btn edit" data-id="${i}">Edit</button>
+            </td>
+        `;
+            tableBody.appendChild(row);
+        }
+        else {
+            break;
+        }
+    }
+}
+
+function findIndicesByText(jsonArray, searchTexts) {
+    const indices = [];
+    jsonArray.forEach((row, index) => {
+        if (row.some(cell => searchTexts.includes(cell))) {
+            indices.push(index);
+        }
+    });
+    return indices;
+}
+
 
 // Attach edit handlers to all tables
 Object.keys(databases).forEach((tab) => {
