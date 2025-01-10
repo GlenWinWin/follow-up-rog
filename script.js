@@ -48,17 +48,17 @@ function populateTable(index, targetTab) {
 
     for (let i = start; i <= end; i++) {
         const row = state.arrayDetails[i];
-        if (!row[4]?.trim()) break;
+        if (!row[3]?.trim()) break;
 
         const rowData = {
-            id: row[0],
-            name: row[4],
-            interested: row[10],
-            discipler: row[11],
-            texted: row[12],
-            update: row[13] ?? "",
-            followedUp: row[14] ?? "",
-            started: row[15] ?? ""
+            id: i,
+            name: row[3],
+            interested: row[9],
+            discipler: row[10],
+            texted: row[11],
+            update: row[12] ?? "",
+            followedUp: row[13] ?? "",
+            started: row[14] ?? ""
         };
 
         appendTableRow(tableBody, rowData);
