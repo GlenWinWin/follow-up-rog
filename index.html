@@ -444,7 +444,7 @@
 
         // Update UI based on sign-in status
         function updateSigninStatus(isSignedIn) {
-            state.isAuthenticated = isSignedIn;
+            state['isAuthenticated'] = isSignedIn;
             if (isSignedIn) {
                 getData("tab1"); // Load initial data when signed in
             } else {
