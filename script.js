@@ -51,7 +51,7 @@ function populateTable(index, targetTab) {
         if (!row[4]?.trim()) break;
 
         const rowData = {
-            id: i,
+            id: row[0],
             name: row[4],
             interested: row[10],
             discipler: row[11],
