@@ -21,25 +21,6 @@ const state = {
     isAuthenticated: false
 };
 
-function handleCredentialResponse(response) {
-    console.log("Encoded JWT ID token: " + response.credential);
-    const userObject = parseJwt(response.credential);
-    state['userData'] = userObject;
-    state['userData']['access_token'] = response.credential;
-    state['isAuthenticated'] = true;
-    console.log("User Info:", userObject);
-    getData("tab1");
-}
-
-function parseJwt(token) {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-    return JSON.parse(jsonPayload);
-}
-
 async function getData(targetTab) {
     try {
         if (!state.arrayDetails) {
