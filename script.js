@@ -1,6 +1,6 @@
 // Constants for Google API
 const CONFIG = {
-    API_KEY: "AIzaSyAhVwHSDKNFqhLcERQPWXXQrWTezS9mmmI",
+    API_KEY: "AIzaSyCff2TnvcnWa64USTtf8t7TLVvqkTzdP5I",
     SPREADSHEET_ID: "1Ta9OsOKkrydSdtnSN-HUjEcUMevgboc1mlzmlDZX1_U",
     CLIENT_ID: "653073386096-flq5n7ukan8cs2rtla2cgg9cm3aphl22.apps.googleusercontent.com",
     SHEET_NAME: "JANUARY"
