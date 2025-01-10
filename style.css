@@ -143,7 +143,7 @@ table td .delete {
 }
 
 table td .btn:hover {
-    opacity: 0.8;
+    opacity: 1;
 }
 
 /* Responsive Table Design */
