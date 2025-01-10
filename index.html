@@ -520,6 +520,7 @@
 
         // Update Google Sheets
         async function updateRow(id, values) {
+            console.log(state.isAuthenticated);
             if (!state.isAuthenticated) {
                 try {
                     await gapi.auth2.getAuthInstance().signIn();
