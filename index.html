@@ -415,13 +415,6 @@
 
             console.log("User Info:", userObject);
 
-            // Display a welcome message
-            document.body.insertAdjacentHTML('beforeend', `
-                <h2>Welcome, ${userObject.name}</h2>
-                <p>Email: ${userObject.email}</p>
-                <img src="${userObject.picture}" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%;">
-            `);
-
             // Fetch data for Tab 1 as default after sign-in
             getData("tab1");
         }
