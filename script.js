@@ -13,16 +13,19 @@ let editState = {
 
 let arrayDetails;
 
+const API_KEY = "AIzaSyAhVwHSDKNFqhLcERQPWXXQrWTezS9mmmI";
+const SPREADSHEET_ID = "1Ta9OsOKkrydSdtnSN-HUjEcUMevgboc1mlzmlDZX1_U";
+
 getData("tab1");
 
 const saveButton = document.getElementById("saveModal");
 if (saveButton) {
-    saveButton.addEventListener("click", () => {
+    saveButton.addEventListener("click", async () => {
         const database = databases[editState.tab];
         const item = database.find((data) => data.id === editState.id);
 
         if (item) {
-            // Update item with modal field values
+            // Update local data
             item.name = document.getElementById("modalName").value;
             item.interested = document.getElementById("modalInterested").value;
             item.discipler = document.getElementById("modalDiscipler").value;
@@ -30,6 +33,20 @@ if (saveButton) {
             item.update = document.getElementById("modalUpdate").value;
             item.followedUp = document.getElementById("modalFollowedUp").value;
             item.started = document.getElementById("modalStarted").value;
+
+            // Update Google Sheets
+            const sheetRange = `JANUARY!D${editState.id + 1}:O${editState.id + 1}`; // Update the row range dynamically
+            const updatedValues = [
+                item.name,
+                item.interested,
+                item.discipler,
+                item.texted,
+                item.update,
+                item.followedUp,
+                item.started,
+            ];
+
+            // await updateRow(SPREADSHEET_ID, sheetRange, updatedValues, API_KEY);
 
             // Re-render the table
             renderTable(editState.tab);
@@ -41,6 +58,34 @@ if (saveButton) {
     });
 } else {
     console.error("Save button not found in the DOM!");
+}
+
+// Function to update a row in Google Sheets
+async function updateRow(sheetId, range, values, apiKey) {
+    const URL = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
+    const requestBody = {
+        range: range, // Example: "Sheet1!A2:G2"
+        values: [values], // Replace with your updated row values
+    };
+
+    try {
+        const response = await fetch(URL, {
+            method: "PUT", // Use PUT for updating rows
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestBody),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log("Row updated successfully:", data);
+        } else {
+            console.error("Failed to update row:", await response.text());
+        }
+    } catch (error) {
+        console.error("Error updating row:", error);
+    }
 }
 
 // Render table
@@ -67,8 +112,6 @@ function renderTable(tab) {
     });
 }
 
-
-
 // Edit functionality
 function editData(tab, id) {
     const database = databases[tab];
@@ -93,8 +136,6 @@ function editData(tab, id) {
     }
 }
 
-
-// Save updates
 function saveData(tab) {
     const database = databases[tab];
     const form = document.getElementById(`dataForm${tab.replace("tab", "")}`);
@@ -149,9 +190,8 @@ document.querySelectorAll(".tab-button").forEach((tabButton) => {
     });
 });
 
+// Fetch and populate data
 function getData(targetTab) {
-    let API_KEY = "AIzaSyAhVwHSDKNFqhLcERQPWXXQrWTezS9mmmI";
-    let SPREADSHEET_ID = "1Ta9OsOKkrydSdtnSN-HUjEcUMevgboc1mlzmlDZX1_U";
     let RANGE = "JANUARY";
     let index = parseInt(String(targetTab).replace("tab", "")) - 1;
 
@@ -159,28 +199,28 @@ function getData(targetTab) {
 
     if (arrayDetails !== undefined) {
         populateTable(index, targetTab);
-    }
-    else {
+    } else {
         fetch(URL)
-            .then(res => res.json())
-            .then(data => {
+            .then((res) => res.json())
+            .then((data) => {
                 arrayDetails = data.values;
+                populateTable(index, targetTab);
             })
-            .catch(error => console.error("Error fetching data:", error));
+            .catch((error) => console.error("Error fetching data:", error));
     }
-
-
 }
 
 function populateTable(index, targetTab) {
+    console.log(index, targetTab);
     const searchTexts = ["XO", "YA", "WOMEN", "MEN", "SEASONED"];
     const result = findIndicesByText(arrayDetails, searchTexts);
 
-    const start = (result[index] + 1);
-    const end = index == 4 ? (arrayDetails.length - 1) : ((result[index + 1]) - 1);
+    const start = result[index] + 1;
+    const end = index == 4 ? arrayDetails.length - 1 : result[index + 1] - 1;
 
     const tableBody = document.querySelector(`#dataTable${targetTab.replace("tab", "")} tbody`);
     tableBody.innerHTML = ""; // Clear table
+    let tabData = [];
     for (var i = start; i <= end; i++) {
         if (String(arrayDetails[i][3]).trim() !== "") {
             const row = document.createElement("tr");
@@ -197,23 +237,34 @@ function populateTable(index, targetTab) {
             </td>
         `;
             tableBody.appendChild(row);
-        }
-        else {
+
+            tabData.push({
+                "id": i,
+                "name": arrayDetails[i][3],
+                "interested": arrayDetails[i][9],
+                "discipler": arrayDetails[i][10],
+                "texted": arrayDetails[i][11],
+                "update": arrayDetails[i][12],
+                "followedUp": arrayDetails[i][13],
+                "started": arrayDetails[i][14]
+            })
+        } else {
             break;
         }
     }
+
+    databases[targetTab] = tabData;
 }
 
 function findIndicesByText(jsonArray, searchTexts) {
     const indices = [];
     jsonArray.forEach((row, index) => {
-        if (row.some(cell => searchTexts.includes(cell))) {
+        if (row.some((cell) => searchTexts.includes(cell))) {
             indices.push(index);
         }
     });
     return indices;
 }
-
 
 // Attach edit handlers to all tables
 Object.keys(databases).forEach((tab) => {
