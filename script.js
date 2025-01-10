@@ -86,11 +86,6 @@ function appendTableRow(tableBody, data) {
 }
 
 async function updateRow(id, values) {
-    if (!state.isAuthenticated) {
-        console.error("Authentication required");
-        return;
-    }
-
     const range = `${CONFIG.SHEET_NAME}!D${id + 1}:O${id + 1}`;
     try {
         const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SPREADSHEET_ID}/values/${range}?valueInputOption=USER_ENTERED&key=${CONFIG.API_KEY}`, {
