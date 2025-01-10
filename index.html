@@ -521,32 +521,42 @@
         }
 
         // Update Google Sheets
-        async function updateRow(id, values) {
-            console.log(state.isAuthenticated);
+        async function updateRow(rowId, values) {
             if (!state.isAuthenticated) {
                 try {
-                    await gapi.auth2.getAuthInstance().signIn();
-                } catch (error) {
-                    console.error("Authentication failed:", error);
-                    throw new Error("Authentication required");
+                    // Ensure the user is signed in
+                    const authInstance = gapi.auth2.getAuthInstance();
+                    await authInstance.signIn();
+                } catch (authError) {
+                    console.error("Authentication failed:", authError);
+                    throw new Error("Authentication is required to update the row.");
                 }
             }
 
-            const range = `${CONFIG.SHEET_NAME}!D${id + 1}:O${id + 1}`;
+            // Define the range in A1 notation for the specific row
+            const range = `${CONFIG.SHEET_NAME}!D${rowId + 1}:O${rowId + 1}`;
+
             try {
+                // Define the update request
                 const request = {
                     spreadsheetId: CONFIG.SPREADSHEET_ID,
                     range: range,
-                    valueInputOption: 'RAW',
-                    resource: { values: [values] }
+                    valueInputOption: 'RAW', // RAW or USER_ENTERED based on your need
+                    resource: {
+                        values: [values], // Wrap the values in an array
+                    },
                 };
 
-                await gapi.client.sheets.spreadsheets.values.update(request);
-            } catch (error) {
-                console.error("Error updating row:", error);
-                throw error;
+                // Make the API call to update the values
+                const response = await gapi.client.sheets.spreadsheets.values.update(request);
+
+                console.log("Row updated successfully:", response);
+            } catch (updateError) {
+                console.error("Error updating the row:", updateError);
+                throw updateError;
             }
         }
+
 
         // Edit functionality
         function handleEditClick(tab, id) {
