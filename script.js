@@ -178,6 +178,7 @@ function handleTabClick(event) {
 }
 
 function init() {
+    redirectToGoogleAuth();
     document.querySelectorAll(".tab-button").forEach(button => {
         button.addEventListener("click", handleTabClick);
     });
@@ -213,6 +214,17 @@ function init() {
             }
         });
     });
+}
+
+function redirectToGoogleAuth() {
+    const clientId = CONFIG.CLIENT_ID;
+    const redirectUri = 'http://localhost'; // Change to your redirect URI
+    const scope = 'https://www.googleapis.com/auth/spreadsheets';
+    const responseType = 'code';
+    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${encodeURIComponent(scope)}&access_type=offline`;
+
+    // Redirect user to Google's authorization page
+    window.location.href = authUrl;
 }
 
 // Start the application
