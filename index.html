@@ -410,12 +410,12 @@
 
             // Decode the token to get user data
             const userObject = parseJwt(response.credential);
-            state.userData = userObject;
-            state.isAuthenticated = true;
+            state['userData'] = userObject;
+            state['isAuthenticated'] = true;
 
             console.log("User Info:", userObject);
 
-            console.log(state.isAuthenticated);
+            console.log(state);
 
             // Fetch data for Tab 1 as default after sign-in
             getData("tab1");
