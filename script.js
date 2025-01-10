@@ -3,6 +3,7 @@ const CONFIG = {
     API_KEY: "AIzaSyCff2TnvcnWa64USTtf8t7TLVvqkTzdP5I",
     SPREADSHEET_ID: "1Ta9OsOKkrydSdtnSN-HUjEcUMevgboc1mlzmlDZX1_U",
     CLIENT_ID: "653073386096-flq5n7ukan8cs2rtla2cgg9cm3aphl22.apps.googleusercontent.com",
+    CLIENT_SECRET: "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",
     SHEET_NAME: "JANUARY"
 };
 
@@ -177,8 +178,46 @@ function handleTabClick(event) {
     getData(targetTab);
 }
 
+function getAuthorizationCode() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('code');
+}
+
+async function exchangeCodeForToken(authCode) {
+    const clientId = CONFIG.CLIENT_ID;
+    const clientSecret = CONFIG.CLIENT_SECRET;
+    const redirectUri = 'https://glenwinwin.github.io'; // Same as used in Step 1
+    const tokenUrl = 'https://oauth2.googleapis.com/token';
+
+    const body = new URLSearchParams({
+        code: authCode,
+        client_id: clientId,
+        client_secret: clientSecret,
+        redirect_uri: redirectUri,
+        grant_type: 'authorization_code',
+    });
+
+    try {
+        const response = await fetch(tokenUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: body.toString(),
+        });
+
+        const tokenData = await response.json();
+        console.log('Access Token:', tokenData.access_token);
+        console.log('Refresh Token:', tokenData.refresh_token);
+        return tokenData.access_token;
+    } catch (error) {
+        console.error('Error exchanging code for token:', error);
+    }
+}
+
+
 function init() {
-    redirectToGoogleAuth();
+    startOAuthFlow();
     document.querySelectorAll(".tab-button").forEach(button => {
         button.addEventListener("click", handleTabClick);
     });
@@ -225,6 +264,23 @@ function redirectToGoogleAuth() {
 
     // Redirect user to Google's authorization page
     window.location.href = authUrl;
+}
+
+async function startOAuthFlow() {
+    const authCode = getAuthorizationCode();
+
+    if (!authCode) {
+        // Step 1: Redirect user to Google authorization page
+        redirectToGoogleAuth();
+    } else {
+        // Step 3: Exchange code for access token
+        const accessToken = await exchangeCodeForToken(authCode);
+
+        // Step 4: Use access token to call Google Sheets API
+        if (accessToken) {
+            await callGoogleSheetsAPI(accessToken);
+        }
+    }
 }
 
 // Start the application
