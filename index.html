@@ -14,32 +14,33 @@
     <div class="container">
         <h1>FIRST TIMERS - JANUARY 2025</h1>
         <!-- Tabs -->
-        <div class="tabs mt-4">
-            <button class="tab-button active" data-tab="tab1">XO YOUTH</button>
-            <button class="tab-button" data-tab="tab2">YOUNG ADULTS</button>
-            <button class="tab-button" data-tab="tab3">RIVER WOMEN</button>
-            <button class="tab-button" data-tab="tab4">RIVER MEN</button>
-            <button class="tab-button" data-tab="tab5">SEASONED</button>
+        <!-- Tab Contents -->
+        <div class="tabs mt-4" role="tablist">
+            <button class="tab-button active" data-tab="tab1" aria-label="XO Youth Tab">XO YOUTH</button>
+            <button class="tab-button" data-tab="tab2" aria-label="Young Adults Tab">YOUNG ADULTS</button>
+            <button class="tab-button" data-tab="tab3" aria-label="River Women Tab">RIVER WOMEN</button>
+            <button class="tab-button" data-tab="tab4" aria-label="River Men Tab">RIVER MEN</button>
+            <button class="tab-button" data-tab="tab5" aria-label="Seasoned Tab">SEASONED</button>
         </div>
 
         <!-- Tab Contents -->
         <div id="tab1" class="tab-content active">
-            <form id="dataForm1" class="hidden">
+            <form id="dataForm1" class="hidden" aria-label="Form for XO Youth">
                 <label for="name1">Name:</label>
-                <input type="text" id="name1" placeholder="Enter name" required>
+                <input type="text" id="name1" placeholder="Enter name" required aria-required="true">
 
                 <label for="interested1">Interested to Join:</label>
-                <select id="interested1">
+                <select id="interested1" required aria-required="true">
                     <option value="">Select an option</option>
                     <option value="YES">YES</option>
                     <option value="NO">NO</option>
                 </select>
 
                 <label for="discipler1">Discipler:</label>
-                <input type="text" id="discipler1" placeholder="Enter discipler" required>
+                <input type="text" id="discipler1" placeholder="Enter discipler" required aria-required="true">
 
                 <label for="texted1">Texted Already:</label>
-                <select id="texted1">
+                <select id="texted1" required aria-required="true">
                     <option value="">Select an option</option>
                     <option value="YES">YES</option>
                     <option value="NO">NO</option>
@@ -79,10 +80,42 @@
             </div>
         </div>
 
-        <!-- Repeat similar structure for Tab 2, Tab 3, Tab 4, and Tab 5 -->
         <div id="tab2" class="tab-content">
-            <form id="dataForm2" class="hidden">
-                <!-- Same structure as Tab 1 -->
+            <form id="dataForm2" class="hidden" aria-label="Form for Young Adults">
+                <label for="name2">Name:</label>
+                <input type="text" id="name2" placeholder="Enter name" required aria-required="true">
+
+                <label for="interested2">Interested to Join:</label>
+                <select id="interested2" required aria-required="true">
+                    <option value="">Select an option</option>
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
+                </select>
+
+                <label for="discipler2">Discipler:</label>
+                <input type="text" id="discipler2" placeholder="Enter discipler" required aria-required="true">
+
+                <label for="texted2">Texted Already:</label>
+                <select id="texted2" required aria-required="true">
+                    <option value="">Select an option</option>
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
+                </select>
+
+                <label for="update2">Update:</label>
+                <textarea id="update2" placeholder="Enter update" rows="4"></textarea>
+
+                <label for="followedUp2">Followed Up:</label>
+                <input type="text" id="followedUp2" placeholder="Enter followed up">
+
+                <label for="started2">Started One2One:</label>
+                <select id="started2">
+                    <option value="">Select an option</option>
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
+                </select>
+
+                <button type="submit">Save</button>
             </form>
             <div class="table-wrapper">
                 <table id="dataTable2">
@@ -104,8 +137,41 @@
         </div>
 
         <div id="tab3" class="tab-content">
-            <form id="dataForm3" class="hidden">
-                <!-- Same structure as Tab 1 -->
+            <form id="dataForm3" class="hidden" aria-label="Form for River Women">
+                <label for="name3">Name:</label>
+                <input type="text" id="name3" placeholder="Enter name" required aria-required="true">
+
+                <label for="interested3">Interested to Join:</label>
+                <select id="interested3" required aria-required="true">
+                    <option value="">Select an option</option>
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
+                </select>
+
+                <label for="discipler3">Discipler:</label>
+                <input type="text" id="discipler3" placeholder="Enter discipler" required aria-required="true">
+
+                <label for="texted3">Texted Already:</label>
+                <select id="texted3" required aria-required="true">
+                    <option value="">Select an option</option>
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
+                </select>
+
+                <label for="update3">Update:</label>
+                <textarea id="update3" placeholder="Enter update" rows="4"></textarea>
+
+                <label for="followedUp3">Followed Up:</label>
+                <input type="text" id="followedUp3" placeholder="Enter followed up">
+
+                <label for="started3">Started One2One:</label>
+                <select id="started3">
+                    <option value="">Select an option</option>
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
+                </select>
+
+                <button type="submit">Save</button>
             </form>
             <div class="table-wrapper">
                 <table id="dataTable3">
@@ -127,8 +193,41 @@
         </div>
 
         <div id="tab4" class="tab-content">
-            <form id="dataForm4" class="hidden">
-                <!-- Same structure as Tab 1 -->
+            <form id="dataForm4" class="hidden" aria-label="Form for River Men">
+                <label for="name4">Name:</label>
+                <input type="text" id="name4" placeholder="Enter name" required aria-required="true">
+
+                <label for="interested4">Interested to Join:</label>
+                <select id="interested4" required aria-required="true">
+                    <option value="">Select an option</option>
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
+                </select>
+
+                <label for="discipler4">Discipler:</label>
+                <input type="text" id="discipler4" placeholder="Enter discipler" required aria-required="true">
+
+                <label for="texted4">Texted Already:</label>
+                <select id="texted4" required aria-required="true">
+                    <option value="">Select an option</option>
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
+                </select>
+
+                <label for="update4">Update:</label>
+                <textarea id="update4" placeholder="Enter update" rows="4"></textarea>
+
+                <label for="followedUp4">Followed Up:</label>
+                <input type="text" id="followedUp4" placeholder="Enter followed up">
+
+                <label for="started4">Started One2One:</label>
+                <select id="started4">
+                    <option value="">Select an option</option>
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
+                </select>
+
+                <button type="submit">Save</button>
             </form>
             <div class="table-wrapper">
                 <table id="dataTable4">
@@ -150,8 +249,41 @@
         </div>
 
         <div id="tab5" class="tab-content">
-            <form id="dataForm5" class="hidden">
-                <!-- Same structure as Tab 1 -->
+            <form id="dataForm5" class="hidden" aria-label="Form for Seasoned">
+                <label for="name5">Name:</label>
+                <input type="text" id="name5" placeholder="Enter name" required aria-required="true">
+
+                <label for="interested5">Interested to Join:</label>
+                <select id="interested5" required aria-required="true">
+                    <option value="">Select an option</option>
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
+                </select>
+
+                <label for="discipler5">Discipler:</label>
+                <input type="text" id="discipler5" placeholder="Enter discipler" required aria-required="true">
+
+                <label for="texted5">Texted Already:</label>
+                <select id="texted5" required aria-required="true">
+                    <option value="">Select an option</option>
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
+                </select>
+
+                <label for="update5">Update:</label>
+                <textarea id="update5" placeholder="Enter update" rows="4"></textarea>
+
+                <label for="followedUp5">Followed Up:</label>
+                <input type="text" id="followedUp5" placeholder="Enter followed up">
+
+                <label for="started5">Started One2One:</label>
+                <select id="started5">
+                    <option value="">Select an option</option>
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
+                </select>
+
+                <button type="submit">Save</button>
             </form>
             <div class="table-wrapper">
                 <table id="dataTable5">

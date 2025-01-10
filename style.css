@@ -1,44 +1,51 @@
-/* General styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
+    background-color: #f0f8ff;
+    /* Light blue for a calming effect */
+    color: #333;
+    /* Darker text for better readability */
 }
 
 .container {
     max-width: 1200px;
     margin: 50px auto;
-    background: #fff;
+    background: #ffffff;
     padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    color: #4b9cd3;
+    /* Soothing blue color */
 }
 
 .tabs {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .tab-button {
     flex: 1;
-    padding: 10px;
-    background: #ddd;
-    border: none;
+    padding: 12px;
+    background: #e0f7fa;
+    /* Light cyan */
+    border: 1px solid #4b9cd3;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: #007bff;
 }
 
 .tab-button.active {
-    background-color: #28a745;
-    color: #fff;
+    background-color: #4b9cd3;
+    color: #ffffff;
 }
 
 .tab-content {
@@ -49,149 +56,97 @@ h1 {
     display: block;
 }
 
-form.hidden {
-    display: none;
-}
-
 form {
     display: grid;
-    gap: 10px;
+    gap: 15px;
     margin-bottom: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+form.hidden {
+    display: none;
 }
 
 form label {
     font-size: 14px;
     font-weight: bold;
-    margin-bottom: 5px;
+    color: #007bff;
 }
 
 form input,
-form select {
+form select,
+form textarea {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #fff;
-}
-
-form select {
-    cursor: pointer;
+    border-radius: 8px;
+    background-color: #f9f9f9;
 }
 
 form button {
     padding: 12px 30px;
     font-size: 18px;
     border: none;
-    background-color: #28a745;
+    background-color: #4b9cd3;
     color: #fff;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
 }
 
 form button:hover {
-    background-color: #218838;
+    background-color: #007bff;
 }
 
-/* Table styles */
 .table-wrapper {
+    width: 100%;
     overflow-x: auto;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-}
-
-table th,
-table td {
-    padding: 16px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
 }
 
 table th {
-    background-color: #f8f9fa;
+    background-color: #e3f2fd;
+    /* Light blue */
+    padding: 16px;
+    text-align: left;
+    font-size: 14px;
+    color: #007bff;
+}
+
+table td {
+    padding: 16px;
+    border-bottom: 1px solid #ddd;
 }
 
 table td .btn {
-    padding: 8px 15px;
+    padding: 8px 12px;
     font-size: 14px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
 }
 
 table td .edit {
-    background-color: #007bff;
+    background-color: #4caf50;
+    /* Green */
     color: #fff;
 }
 
 table td .delete {
-    background-color: #dc3545;
+    background-color: #f44336;
+    /* Red */
     color: #fff;
 }
 
 table td .btn:hover {
-    background-color: #007bff;
-    color: #fff;
+    opacity: 0.8;
 }
 
-/* Active tab styles for each tab */
-.tab-button.tab1-active {
-    background-color: #28a745;
-    /* Green for Tab 1 */
-    color: #fff;
-}
-
-.tab-button.tab2-active {
-    background-color: #fd7e14;
-    /* Orange for Tab 2 */
-    color: #fff;
-}
-
-.tab-button.tab3-active {
-    background-color: #dc3545;
-    /* Red for Tab 3 */
-    color: #fff;
-}
-
-.tab-button.tab4-active {
-    background-color: #007bff;
-    /* Blue for Tab 4 */
-    color: #fff;
-}
-
-.tab-button.tab5-active {
-    background-color: #e83e8c;
-    /* Pink for Tab 5 */
-    color: #fff;
-}
-
-/* General textarea styles */
-form textarea {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #fff;
-    resize: vertical;
-    /* Allow vertical resizing */
-    min-height: 80px;
-    /* Ensure a default height */
-}
-
-/* Focus state for textarea */
-form textarea:focus {
-    outline: none;
-    border-color: #007bff;
-    /* Add a blue border on focus */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    /* Add a light blue glow */
-}
-
-
-/* Responsive Table for Mobile */
+/* Responsive Table Design */
 @media (max-width: 768px) {
     table {
         display: block;
@@ -209,15 +164,14 @@ form textarea:focus {
         display: block;
         margin-bottom: 10px;
         border: 1px solid #ddd;
-        border-radius: 4px;
-        background: #fff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     table td {
         display: flex;
         justify-content: space-between;
-        align-items: center;
         padding: 10px;
         font-size: 14px;
         border-bottom: 1px solid #eee;
@@ -229,10 +183,10 @@ form textarea:focus {
 
     table td:before {
         content: attr(data-label);
-        flex-basis: 40%;
+        flex-basis: 50%;
         text-align: left;
         font-weight: bold;
-        color: #555;
+        color: #007bff;
     }
 
     table td .btn {
@@ -240,39 +194,20 @@ form textarea:focus {
     }
 }
 
-/* Modal-specific customization */
-.modal-content {
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
 .modal-header {
-    background-color: #007bff;
+    background-color: #4b9cd3;
     color: #fff;
-    border-bottom: none;
 }
 
-.modal-title {
-    font-weight: bold;
+.modal-footer button {
+    border-radius: 8px;
+    padding: 10px 20px;
 }
 
-.modal-footer {
-    border-top: none;
+.modal-footer .btn-primary {
+    background-color: #007bff;
 }
 
-.modal .form-label {
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.modal .form-control,
-.modal .form-select {
-    padding: 10px;
-    font-size: 16px;
-}
-
-.modal .form-control:focus,
-.modal .form-select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+.modal-footer .btn-secondary {
+    background-color: #e0e0e0;
 }
