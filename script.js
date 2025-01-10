@@ -25,6 +25,7 @@ function handleCredentialResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
     const userObject = parseJwt(response.credential);
     state['userData'] = userObject;
+    state['userData']['access_token'] = response.credential;
     state['isAuthenticated'] = true;
     console.log("User Info:", userObject);
     getData("tab1");
