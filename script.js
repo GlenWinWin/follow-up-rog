@@ -3,7 +3,6 @@ const CONFIG = {
     API_KEY: "AIzaSyCff2TnvcnWa64USTtf8t7TLVvqkTzdP5I",
     SPREADSHEET_ID: "1Ta9OsOKkrydSdtnSN-HUjEcUMevgboc1mlzmlDZX1_U",
     CLIENT_ID: "653073386096-flq5n7ukan8cs2rtla2cgg9cm3aphl22.apps.googleusercontent.com",
-    GLENWIN: "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",
     SHEET_NAME: "JANUARY"
 };
 
@@ -192,7 +191,7 @@ async function exchangeCodeForToken(authCode) {
     const body = new URLSearchParams({
         code: authCode,
         client_id: clientId,
-        client_secret: clientSecret,
+        client_secret: "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",
         redirect_uri: redirectUri,
         grant_type: 'authorization_code',
     });
