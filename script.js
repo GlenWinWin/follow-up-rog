@@ -111,8 +111,6 @@ async function updateRow(id, values) {
     }
 
     const range = `${CONFIG.SHEET_NAME}!D${id + 1}:O${id + 1}`;
-
-    console.log(state.userData.access_token);
     try {
         const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SPREADSHEET_ID}/values/${range}?valueInputOption=USER_ENTERED&key=${CONFIG.API_KEY}`, {
             method: 'PUT',
@@ -177,46 +175,7 @@ function handleTabClick(event) {
     getData(targetTab);
 }
 
-function getAuthorizationCode() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('code');
-}
-
-async function exchangeCodeForToken(authCode) {
-    const clientId = CONFIG.CLIENT_ID;
-    const clientSecret = CONFIG.GLENWIN;
-    const redirectUri = 'https://glenwinwin.github.io'; // Same as used in Step 1
-    const tokenUrl = 'https://oauth2.googleapis.com/token';
-
-    const body = new URLSearchParams({
-        code: authCode,
-        client_id: clientId,
-        client_secret: "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",
-        redirect_uri: redirectUri,
-        grant_type: 'authorization_code',
-    });
-
-    try {
-        const response = await fetch(tokenUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: body.toString(),
-        });
-
-        const tokenData = await response.json();
-        console.log('Access Token:', tokenData.access_token);
-        console.log('Refresh Token:', tokenData.refresh_token);
-        return tokenData.access_token;
-    } catch (error) {
-        console.error('Error exchanging code for token:', error);
-    }
-}
-
-
 function init() {
-    startOAuthFlow();
     document.querySelectorAll(".tab-button").forEach(button => {
         button.addEventListener("click", handleTabClick);
     });
@@ -252,34 +211,6 @@ function init() {
             }
         });
     });
-}
-
-function redirectToGoogleAuth() {
-    const clientId = CONFIG.CLIENT_ID;
-    const redirectUri = 'http://localhost'; // Change to your redirect URI
-    const scope = 'https://www.googleapis.com/auth/spreadsheets';
-    const responseType = 'code';
-    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${encodeURIComponent(scope)}&access_type=offline`;
-
-    // Redirect user to Google's authorization page
-    window.location.href = authUrl;
-}
-
-async function startOAuthFlow() {
-    const authCode = getAuthorizationCode();
-
-    if (!authCode) {
-        // Step 1: Redirect user to Google authorization page
-        redirectToGoogleAuth();
-    } else {
-        // Step 3: Exchange code for access token
-        const accessToken = await exchangeCodeForToken(authCode);
-
-        // Step 4: Use access token to call Google Sheets API
-        if (accessToken) {
-            await callGoogleSheetsAPI(accessToken);
-        }
-    }
 }
 
 // Start the application
