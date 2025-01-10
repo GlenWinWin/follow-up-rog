@@ -166,6 +166,8 @@ function init() {
                 item[field] = document.getElementById(`modal${field.charAt(0).toUpperCase() + field.slice(1)}`).value;
             });
 
+            state.databases[tab] = item;
+
             // await updateRow(id, [
             //     item.name, 'G', 'G', 'G', 'G', 'G', item.interested, item.discipler, item.texted,
             //     item.update, item.followedUp, item.started
