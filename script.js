@@ -3,7 +3,7 @@ const CONFIG = {
     API_KEY: "AIzaSyCff2TnvcnWa64USTtf8t7TLVvqkTzdP5I",
     SPREADSHEET_ID: "1Ta9OsOKkrydSdtnSN-HUjEcUMevgboc1mlzmlDZX1_U",
     CLIENT_ID: "653073386096-flq5n7ukan8cs2rtla2cgg9cm3aphl22.apps.googleusercontent.com",
-    CLIENT_SECRET: "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",
+    GLENWIN: "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",
     SHEET_NAME: "JANUARY"
 };
 
@@ -185,7 +185,7 @@ function getAuthorizationCode() {
 
 async function exchangeCodeForToken(authCode) {
     const clientId = CONFIG.CLIENT_ID;
-    const clientSecret = CONFIG.CLIENT_SECRET;
+    const clientSecret = CONFIG.GLENWIN;
     const redirectUri = 'https://glenwinwin.github.io'; // Same as used in Step 1
     const tokenUrl = 'https://oauth2.googleapis.com/token';
 
