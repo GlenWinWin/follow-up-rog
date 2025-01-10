@@ -166,10 +166,10 @@ function init() {
                 item[field] = document.getElementById(`modal${field.charAt(0).toUpperCase() + field.slice(1)}`).value;
             });
 
-            await updateRow(id, [
-                item.name, 'G', 'G', 'G', 'G', 'G', item.interested, item.discipler, item.texted,
-                item.update, item.followedUp, item.started
-            ]);
+            // await updateRow(id, [
+            //     item.name, 'G', 'G', 'G', 'G', 'G', item.interested, item.discipler, item.texted,
+            //     item.update, item.followedUp, item.started
+            // ]);
 
             populateTable(parseInt(tab.replace("tab", "")) - 1, tab);
             bootstrap.Modal.getInstance(document.getElementById("editModal")).hide();
