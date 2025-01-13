@@ -152,6 +152,8 @@ function handleTabClick(event) {
 }
 
 function init() {
+    getData("tab1");
+
     document.querySelectorAll(".tab-button").forEach(button => {
         button.addEventListener("click", handleTabClick);
     });
