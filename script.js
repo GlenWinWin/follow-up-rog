@@ -53,11 +53,6 @@ function populateTable(index, targetTab) {
         const rowData = {
             id: i,
             name: row[3],
-            city: row[4],
-            contact_no: row[5],
-            first_timer_or_visitor: row[6],
-            invited_by: row[7],
-            approached_by: row[8],
             interested: row[9],
             discipler: row[10],
             texted: row[11],
